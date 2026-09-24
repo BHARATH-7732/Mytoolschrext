@@ -998,3 +998,35 @@
                 const rect = card.getBoundingClientRect();
                 card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
                 card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+            });
+        });
+
+        const cards = document.querySelectorAll('.card');
+        const feedback = document.getElementById('selected-feedback');
+        function selectCard(targetCard) {
+            cards.forEach(c => c.classList.remove('selected'));
+            targetCard.classList.add('selected');
+            const name = targetCard.dataset.name;
+            feedback.innerHTML = '<div class="feedback-pill"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>' + name + ' selected — click Download Extension to get started</div>';
+        }
+        cards.forEach(card => {
+            card.addEventListener('click', e => { if (e.target.closest('a')) return; selectCard(card) });
+            card.querySelector('.btn-select').addEventListener('click', e => { e.stopPropagation(); selectCard(card) });
+        });
+
+        const counters = document.querySelectorAll('.counter');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target, target = +el.dataset.target;
+                let current = 0;
+                const step = Math.ceil(target / 40);
+                const timer = setInterval(() => { current = Math.min(current + step, target); el.textContent = current; if (current >= target) clearInterval(timer) }, 30);
+                observer.unobserve(el);
+            });
+        }, { threshold: .5 });
+        counters.forEach(c => observer.observe(c));
+    </script>
+</body>
+
+</html>
