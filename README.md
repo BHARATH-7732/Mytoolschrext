@@ -40,17 +40,6 @@ scraper-extension-hub/
         └── README.md
 ```
 
-## GitHub Pages
-
-After uploading this repository to GitHub:
-
-1. Open **Settings → Pages**.
-2. Choose **Deploy from a branch**.
-3. Select **main** and **/(root)**.
-4. Save.
-
-The published GitHub Pages site will use `index.html`.
-
 ## Chrome extension installation
 
 Download one of the extension ZIP files from the website, extract it, then:
