@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Go4Database Smart Exporter",
+  "version": "3.0.0",
+  "description": "Go4Database lead extraction, deduplication, IndexedDB storage and CSV export.",
+  "permissions": [
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://app.go4database.com/*"
+  ],
+  "action": {
+    "default_title": "Go4Database Smart Exporter",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.go4database.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
